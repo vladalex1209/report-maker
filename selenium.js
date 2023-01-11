@@ -25,7 +25,7 @@ module.exports = {
 
       await driver.findElement(By.xpath("//body/div[@class='main-wrapper']/div[@class='content-wrapper']/div[@class='container-fluid']/div//div[@class='page-header-actions pull-right']/div/a[@role='button']/i")).click();
 
-      await driver.findElement(By.xpath(`//body/div[@class='main-wrapper']/div[@class='content-wrapper']/div[@class='container-fluid']/div/div//div[@class='page-header-actions pull-right']/div/ul[@class='dropdown-menu dropdown-menu-right']//a[@href='/organizations/80807/time_entries/daily_export.csv?date=${currentDate}&date_end=${currentDate}&filters%5Buser%5D=1822058&filters%5Bshow_activity%5D=true&filters%5Bshow_idle%5D=true']`)).click();
+      await driver.findElement(By.css(`div:nth-of-type(2) > .dropdown-menu.dropdown-menu-right > li:nth-of-type(2) > a`)).click();
 
       await driver.sleep(2000);
 
