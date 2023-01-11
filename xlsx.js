@@ -9,7 +9,7 @@ module.exports = {
       fs.mkdirSync(pathToFolder);
     }
 
-    filePath = './reports/report - ' + currentDate + '.xlsx'
+    let filePath = './reports/report - ' + currentDate + '.xlsx'
 
     function tasks(sumOfTasks) {
 

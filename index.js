@@ -18,7 +18,7 @@ const { promptUser } = require('./prompts.js');
       process.exit();
     }
 
-    currentDate = new Date();
+    let currentDate = new Date();
 
     currentDate = currentDate.toISOString().split('T')[0];
 
