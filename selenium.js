@@ -103,7 +103,7 @@ module.exports = {
 
           let missedTime = await promptUser("How much time was missed? (minutes) ")
 
-          if (missedTime > 60) { missedTime = `${Math.floor(missedTime / 60)}:${missedTime % 60}`; console.log(missedTime) }
+          if (missedTime > 60) { missedTime = `${Math.floor(missedTime / 60)}:${missedTime % 60}` }
 
           function timeDiffrence(time, miss) {
             if (miss === '0') return time;
@@ -141,7 +141,8 @@ module.exports = {
           }
 
           reportObj.push(obj);
-          console.log(reportObj)
+
+          fs.unlinkSync(csvFilePath);
 
         });
     } catch (e) {

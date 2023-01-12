@@ -1,15 +1,11 @@
 const fs = require('fs')
 const xlsx = require('write-excel-file/node')
+require('dotenv').config()
 
 module.exports = {
   toXlsxFile: (reportObj, currentDate) => {
-    console.log(reportObj)
-    let pathToFolder = './reports'
-    if (!fs.existsSync(pathToFolder)) {
-      fs.mkdirSync(pathToFolder);
-    }
 
-    let filePath = './reports/report - ' + currentDate + '.xlsx'
+    let filePath = `C://Users//${process.env.USER}//Desktop//`;
 
     function tasks(sumOfTasks) {
 
@@ -40,8 +36,8 @@ module.exports = {
       HEADER_ROW.push(
         {
           value: 'Project',
-          topBorderStyle: 'thin',
-          leftBorderStyle: 'thin',
+          topBorderStyle: 'thick',
+          leftBorderStyle: 'thick',
           align: 'center',
           color: "#ffffff",
           backgroundColor: '#8e86ae',
@@ -49,8 +45,8 @@ module.exports = {
         }, null, null,
         {
           value: 'Hours Worked',
-          topBorderStyle: 'thin',
-          rightBorderStyle: 'thin',
+          topBorderStyle: 'thick',
+          rightBorderStyle: 'thick',
           color: "#ffffff",
           backgroundColor: '#8e86ae'
         })
@@ -60,8 +56,8 @@ module.exports = {
           value: reportObj[i].project,
           backgroundColor: '#ffffff',
           color: "#000000",
-          leftBorderStyle: 'thin',
-          bottomBorderStyle: 'thin',
+          leftBorderStyle: 'thick',
+          bottomBorderStyle: 'thick',
           alignVertical: 'center',
           align: 'center',
           rowSpan: 3,
@@ -71,7 +67,7 @@ module.exports = {
           value: reportObj[i].total.slice(0, -3),
           backgroundColor: '#ffffff',
           color: '#000000',
-          rightBorderStyle: 'thin',
+          rightBorderStyle: 'thick',
         })
 
       DATA_ROW_2.push(null, null,
@@ -80,7 +76,7 @@ module.exports = {
           value: '',
           backgroundColor: '#8e86ae',
           color: "#ffffff",
-          rightBorderStyle: 'thin',
+          rightBorderStyle: 'thick',
         })
 
       DATA_ROW_3.push(null, null,
@@ -89,8 +85,8 @@ module.exports = {
           value: tasks(reportObj[i]),
           backgroundColor: '#ffffff',
           color: "#000000",
-          rightBorderStyle: 'thin',
-          bottomBorderStyle: 'thin',
+          rightBorderStyle: 'thick',
+          bottomBorderStyle: 'thick',
         })
 
       EMPTY_ROW_4 = [null, null]
@@ -101,15 +97,19 @@ module.exports = {
 
     }
 
-    let HEADER_ROW = [{ value: "In", backgroundColor: '#8e86ae', topBorderStyle: 'thin', leftBorderStyle: 'thin', color: "#ffffff" }, { value: "Out", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thin' }, { value: "Total", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thin', rightBorderStyle: 'thin' }]
-    let DATA_ROW_1 = [{ value: reportObj[reportObj.length - 1].Start.slice(0, -3), color: "#000000", leftBorderStyle: 'thin', backgroundColor: '#000000', }, { value: reportObj[reportObj.length - 1].End.slice(0, -3), color: "#000000", bottomBorderStyle: 'thin', backgroundColor: '#000000', }, { value: reportObj[reportObj.length - 1].Total.slice(0, -3), color: "#000000", rightBorderStyle: 'thin', bottomBorderStyle: 'thin', backgroundColor: '#000000', }]
-    let DATA_ROW_2 = [{ value: "Miss", backgroundColor: '#8e86ae', color: "#ffffff", leftBorderStyle: 'thin', rightBorderStyle: 'thin' }]
-    let DATA_ROW_3 = [{ value: reportObj[reportObj.length - 1].Miss, color: "#000000", leftBorderStyle: 'thin', rightBorderStyle: 'thin', bottomBorderStyle: 'thin', backgroundColor: '#ffffff', }]
+    let HEADER_ROW = [{ value: "In", backgroundColor: '#8e86ae', topBorderStyle: 'thick', leftBorderStyle: 'thick', color: "#ffffff" }, { value: "Out", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thick' }, { value: "Total", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thick', rightBorderStyle: 'thick' }]
+    let DATA_ROW_1 = [{ value: reportObj[reportObj.length - 1].Start.slice(0, -3), color: "#000000", leftBorderStyle: 'thick', backgroundColor: '#ffffff', }, { value: reportObj[reportObj.length - 1].End.slice(0, -3), color: "#000000", bottomBorderStyle: 'thick', backgroundColor: '#ffffff', }, { value: reportObj[reportObj.length - 1].Total.slice(0, -3), color: "#ffffff", rightBorderStyle: 'thick', bottomBorderStyle: 'thick', backgroundColor: '#ffffff', }]
+    let DATA_ROW_2 = [{ value: "Miss", backgroundColor: '#8e86ae', color: "#ffffff", leftBorderStyle: 'thick', rightBorderStyle: 'thick' }]
+    let DATA_ROW_3 = [{ value: reportObj[reportObj.length - 1].Miss, color: "#000000", leftBorderStyle: 'thick', rightBorderStyle: 'thick', bottomBorderStyle: 'thick', backgroundColor: '#ffffff', }]
 
     data = [...data, HEADER_ROW, DATA_ROW_1, DATA_ROW_2, DATA_ROW_3]
 
-    xlsx(data, {
-      filePath: filePath,
-    })
+    try {
+      xlsx(data, {
+        filePath: filePath,
+      })
+    } catch (err) { console.log(err) }
+
+
   }
 }

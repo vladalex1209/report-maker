@@ -25,10 +25,9 @@ const { promptUser } = require('./prompts.js');
     let reportObj = [];
 
     await fromHubstaff(reportObj, currentDate)
-    console.log(reportObj)
     toXlsxFile(reportObj, currentDate);
 
-    console.log(`Report was created succesfully in the reports folder with name : report - ${currentDate}.txt`);
+    console.log(`Report was created succesfully in the reports folder with name : report - ${currentDate}.xlsx`);
 
   }
   catch (err) {
