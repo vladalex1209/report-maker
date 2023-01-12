@@ -104,7 +104,7 @@ module.exports = {
     let HEADER_ROW = [{ value: "In", backgroundColor: '#8e86ae', topBorderStyle: 'thin', leftBorderStyle: 'thin', color: "#ffffff" }, { value: "Out", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thin' }, { value: "Total", color: "#ffffff", backgroundColor: '#8e86ae', topBorderStyle: 'thin', rightBorderStyle: 'thin' }]
     let DATA_ROW_1 = [{ value: reportObj[reportObj.length - 1].Start.slice(0, -3), color: "#000000", leftBorderStyle: 'thin', backgroundColor: '#000000', }, { value: reportObj[reportObj.length - 1].End.slice(0, -3), color: "#000000", bottomBorderStyle: 'thin', backgroundColor: '#000000', }, { value: reportObj[reportObj.length - 1].Total.slice(0, -3), color: "#000000", rightBorderStyle: 'thin', bottomBorderStyle: 'thin', backgroundColor: '#000000', }]
     let DATA_ROW_2 = [{ value: "Miss", backgroundColor: '#8e86ae', color: "#ffffff", leftBorderStyle: 'thin', rightBorderStyle: 'thin' }]
-    let DATA_ROW_3 = [{ value: reportObj[reportObj.length - 1].Miss, color: "#000000", leftBorderStyle: 'thin', rightBorderStyle: 'thin', bottomBorderStyle: 'thin', backgroundColor: '#000000', }]
+    let DATA_ROW_3 = [{ value: reportObj[reportObj.length - 1].Miss, color: "#000000", leftBorderStyle: 'thin', rightBorderStyle: 'thin', bottomBorderStyle: 'thin', backgroundColor: '#ffffff', }]
 
     data = [...data, HEADER_ROW, DATA_ROW_1, DATA_ROW_2, DATA_ROW_3]
 
