@@ -1,8 +1,15 @@
 const fs = require('fs');
-const prompt = require('prompt-sync')({ sigint: true });
+const path = require('path');
+const homeDir = require('os').homedir();
 const { toXlsxFile } = require('./xlsx.js');
 const { fromHubstaff } = require("./selenium.js");
 const { promptUser } = require('./prompts.js');
+const { By, Key, until } = require("selenium-webdriver");
+const webdriver = require("selenium-webdriver");
+const prompt = require('prompt-sync')({ sigint: true });
+const csvtojson = require('csvtojson');
+const xlsx = require('write-excel-file/node')
+require('dotenv').config();
 
 (async function getReport() {
   try {
@@ -12,8 +19,7 @@ const { promptUser } = require('./prompts.js');
     if (!fs.existsSync(envFilepath)) {
       let email = await promptUser('Please enter your Hubstaff email: ');
       let password = await promptUser('Please enter your Hubstaff password: ', true);
-      let user = await promptUser('Please enter your computer username: ');
-      fs.appendFileSync('.env', `EMAIL=${email}\nPASSWORD=${password}\nUSER=${user}`);
+      fs.appendFileSync('.env', `EMAIL=${email}\nPASSWORD=${password}`);
       console.log('Your credentials have been saved in .env file. Please run the script again.')
       process.exit();
     }
@@ -24,15 +30,15 @@ const { promptUser } = require('./prompts.js');
 
     let reportObj = [];
 
-    await fromHubstaff(reportObj, currentDate)
-    toXlsxFile(reportObj, currentDate);
+    await fromHubstaff(reportObj, currentDate, By, Key, until, webdriver, fs, path, csvtojson, promptUser, homeDir)
+
+    toXlsxFile(reportObj, currentDate, homeDir, xlsx);
 
     console.log(`Report was created succesfully on Dekstop with the name : report - ${currentDate}.xlsx`);
 
   }
   catch (err) {
     console.error(err);
-    if (driver) driver.close();
   }
 })();
 

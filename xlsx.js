@@ -1,11 +1,6 @@
-const fs = require('fs')
-const homeDir = require('os').homedir()
-const path = require('path')
-const xlsx = require('write-excel-file/node')
-require('dotenv').config()
 
 module.exports = {
-  toXlsxFile: (reportObj, currentDate) => {
+  toXlsxFile: (reportObj, currentDate, homeDir, xlsx) => {
 
     let filePath = `${homeDir}/Desktop/${currentDate} - raport.xlsx`;
 

@@ -1,15 +1,6 @@
-
-const { By, Key, until } = require("selenium-webdriver");
-const webdriver = require("selenium-webdriver");
-require('dotenv').config()
-const fs = require('fs');
-const path = require('path');
-const csvtojson = require('csvtojson');
-const { promptUser } = require('./prompts.js');
-
 module.exports = {
 
-  fromHubstaff: async (reportObj, currentDate) => {
+  fromHubstaff: async (reportObj, currentDate, By, Key, until, webdriver, fs, path, csvtojson, promptUser, homeDir) => {
     try {
       const driver = await new webdriver.Builder().forBrowser("chrome").build();
 
@@ -43,7 +34,7 @@ module.exports = {
           .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
       };
 
-      const csvFilePath = `C://Users//${process.env.USER}//Downloads//${getMostRecentFile(`C://Users//${process.env.USER}//Downloads`).file}`;
+      const csvFilePath = `${homeDir}//Downloads//${getMostRecentFile(`C://Users//${process.env.USER}//Downloads`).file}`;
 
       function addTimes(t0, t1) {
         t0 = t0.split(':');
@@ -146,7 +137,8 @@ module.exports = {
 
         });
     } catch (e) {
-      console.log(e);
+      if (driver) driver.close();
+      console.error(e);
     }
   },
 }
